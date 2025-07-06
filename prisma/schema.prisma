@@ -6,10 +6,51 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../lib/generated/prisma"
+  // output   = "../lib/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+// MODELS
+
+model Quest {
+  id         String          @id @default(cuid())
+  title      String
+  category   QuestCategory   @default(MISCELLANEOUS)
+  difficulty QuestDifficulty @default(SIMPLE)
+  repeat     String
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+  status     QuestStatus     @default(PENDING)
+  userId     String?
+}
+
+// ENUMS
+
+enum QuestCategory {
+  LEARNING
+  FITNESS
+  SELFCARE
+  SOCIAL
+  FINANCE
+  CAREER
+  CREATIVITY
+  PRODUCTIVITY
+  MISCELLANEOUS
+}
+
+enum QuestDifficulty {
+  SIMPLE
+  EASY
+  MODERATE
+  HARD
+  INSANE
+}
+
+enum QuestStatus {
+  PENDING
+  COMPLETED
 }
