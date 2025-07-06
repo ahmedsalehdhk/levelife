@@ -21,7 +21,7 @@ model Quest {
   title      String
   category   QuestCategory   @default(MISCELLANEOUS)
   difficulty QuestDifficulty @default(SIMPLE)
-  repeat     String
+  repeat     QuestRepeat     @default(NONE)
   createdAt  DateTime        @default(now())
   updatedAt  DateTime        @updatedAt
   status     QuestStatus     @default(PENDING)
@@ -53,4 +53,12 @@ enum QuestDifficulty {
 enum QuestStatus {
   PENDING
   COMPLETED
+}
+
+enum QuestRepeat {
+  NONE
+  DAILY
+  WEEKLY
+  MONTHLY
+  YEARLY
 }
