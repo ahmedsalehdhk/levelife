@@ -42,19 +42,19 @@ const QuestCard = ({ id, title, category, difficulty, repeat }: QuestCardProps) 
 
   switch (difficulty) {
     case 'SIMPLE':
-      difficultyLevel = '⭐'
+      difficultyLevel = '★'
       break;
     case 'EASY':
-      difficultyLevel = '⭐⭐'
+      difficultyLevel = '★★'
       break;
     case 'MODERATE':
-      difficultyLevel = '⭐⭐⭐'
+      difficultyLevel = '★★★'
       break;
     case 'HARD':
-      difficultyLevel = '⭐⭐⭐⭐'
+      difficultyLevel = '★★★★'
       break;
     case 'INSANE':
-      difficultyLevel = '⭐⭐⭐⭐⭐'
+      difficultyLevel = '★★★★★'
       break;
   
     default:
