@@ -1,9 +1,12 @@
 import React from "react";
 import Form from "next/form";
 import { prisma } from '@/lib/prisma'
-import { QuestCategory, QuestDifficulty, QuestRepeat } from "@prisma/client";
-import { revalidatePath } from "next/cache";
+
+// components
 import QuestCard from "@/components/QuestCard";
+
+// actions
+import { createQuest } from "@/app/actions/createQuest"
 
 const page = async () => {
 
@@ -12,25 +15,6 @@ const page = async () => {
       createdAt: 'desc'
     }
   });
-
-  const createQuest = async (formData: FormData) => {
-    'use server'
-
-    const title = formData.get("title") as string
-    const category = formData.get("category") as QuestCategory
-    const difficulty = formData.get("difficulty") as QuestDifficulty
-    const repeat = formData.get("repeat") as QuestRepeat
-
-    await prisma.quest.create({
-      data: {
-        title,
-        category,
-        difficulty,
-        repeat
-      }
-    })
-    revalidatePath("/quests");
-  }
 
   return (
     <div>
