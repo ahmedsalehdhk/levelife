@@ -1,19 +1,18 @@
 import React from "react";
 import Form from "next/form";
-import { prisma } from '@/lib/prisma'
+import { prisma } from "@/lib/prisma";
 
 // components
 import QuestCard from "@/components/QuestCard";
 
 // actions
-import { createQuest } from "@/app/actions/createQuest"
+import { createQuest } from "@/app/actions/createQuest";
 
 const page = async () => {
-
   const quests = await prisma.quest.findMany({
     orderBy: {
-      createdAt: 'desc'
-    }
+      createdAt: "desc",
+    },
   });
 
   return (
@@ -63,12 +62,9 @@ const page = async () => {
       </Form>
       <hr className="mb-3" />
       <div className="quests flex flex-col space-y-4 p-2">
-        {
-          quests.map((quest) => (
-            <QuestCard key={quest.id} id={quest.id} title={quest.title} category={quest.category} difficulty={quest.difficulty} repeat={quest.repeat} />
-          ))
-        }
-         
+        {quests.map((quest) => (
+          <QuestCard key={quest.id} id={quest.id} title={quest.title} category={quest.category} difficulty={quest.difficulty} repeat={quest.repeat} />
+        ))}
       </div>
     </div>
   );

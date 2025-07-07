@@ -9,6 +9,7 @@ const Navbar = () => {
         <li><Link href='/quests'>Quests</Link></li>
         <li><Link href='/rewards'>Rewards</Link></li>
       </ul>
+      <div className="logo">LEVELIFE</div>
       <div className=""><Link href='/login'>Login</Link></div>
     </nav>
   )

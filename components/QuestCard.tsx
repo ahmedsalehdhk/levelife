@@ -18,7 +18,6 @@ type QuestCardProps = {
 
 const QuestCard = ({ id, title, category, difficulty, repeat }: QuestCardProps) => {
   const [isPending, startTransition] = useTransition();
-  const [showModal, setShowModal] = useState(false);
   const [editing, setEditing] = useState(false);
   const [form, setForm] = useState({ title, category, difficulty, repeat });
 
@@ -49,7 +48,7 @@ const QuestCard = ({ id, title, category, difficulty, repeat }: QuestCardProps) 
 
       {/* Edit Modal */}
       {editing && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-xl bg-opacity-50 flex items-center justify-center z-50">
           <form action={(formData) => handleUpdate(formData)} className="bg-white p-6 rounded shadow-xl w-[400px] space-y-4">
             <h3 className="text-lg font-semibold">Edit Quest</h3>
 
