@@ -9,6 +9,7 @@ import QuestCard from "@/components/QuestCard";
 import { createQuest } from "@/app/actions/createQuest";
 
 const page = async () => {
+
   const quests = await prisma.quest.findMany({
     orderBy: {
       createdAt: "desc",

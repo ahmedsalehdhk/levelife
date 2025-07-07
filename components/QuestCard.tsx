@@ -25,7 +25,7 @@ const QuestCard = ({ id, title, category, difficulty, repeat }: QuestCardProps) 
   const [form, setForm] = useState({ title, category, difficulty, repeat });
 
   const handleDelete = () => {
-    if (confirm("Are you sure you want to delete this quest?")) {
+    if (confirm("Hilarious. Abandon quest for sure?")) {
       startTransition(() => {
         deleteQuest(id);
       });
@@ -79,7 +79,7 @@ const QuestCard = ({ id, title, category, difficulty, repeat }: QuestCardProps) 
       </div>
       <hr className='border-neutral-600 mb-3' />
       <div className="action-buttons flex gap-1 font-black">
-        <button onClick={handleDelete} disabled={isPending} className="flex-1 border p-2 rounded-lg cursor-pointer hover:bg-black hover:text-white hover:border-black transition-colors">Abandon</button>
+        <button onClick={handleDelete} disabled={isPending} className="flex-1 border p-2 rounded-lg cursor-pointer hover:bg-red-500 hover:text-white hover:border-black transition-colors">Abandon</button>
         <button className='flex-1 border p-2 rounded-lg cursor-pointer hover:bg-black hover:text-white hover:border-black transition-colors'>Completed</button>
       </div>
 
@@ -87,7 +87,7 @@ const QuestCard = ({ id, title, category, difficulty, repeat }: QuestCardProps) 
       {editing && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-xl bg-opacity-50 flex items-center justify-center z-50">
           <form action={(formData) => handleUpdate(formData)} className="bg-white p-6 rounded shadow-xl w-[400px] space-y-4">
-            <h3 className="text-lg font-semibold">Edit Quest</h3>
+            <h3 className="text-lg font-semibold">Adjust Quest Details</h3>
 
             <input name="title" defaultValue={form.title} placeholder="Title" required className="border p-2 w-full" />
 
@@ -120,10 +120,10 @@ const QuestCard = ({ id, title, category, difficulty, repeat }: QuestCardProps) 
             </select>
 
             <div className="flex justify-end gap-2 pt-2">
-              <button type="button" onClick={() => setEditing(false)} className="px-4 py-2 bg-gray-200 rounded">
+              <button type="button" onClick={() => setEditing(false)} className="px-4 py-2 bg-gray-200 rounded cursor-pointer">
                 Cancel
               </button>
-              <button type="submit" disabled={isPending} className="px-4 py-2 bg-blue-600 text-white rounded">
+              <button type="submit" disabled={isPending} className="px-4 py-2 bg-blue-600 text-white rounded cursor-pointer">
                 {isPending ? "Updating..." : "Save Changes"}
               </button>
             </div>
