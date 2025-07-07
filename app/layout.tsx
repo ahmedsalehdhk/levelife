@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import { Roboto_Mono } from 'next/font/google'
+import { Roboto_Condensed } from 'next/font/google'
 
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: "Gamification of life",
 };
 
-const robotoMono = Roboto_Mono({
+const robotoCondensed = Roboto_Condensed({
   subsets: ['latin'],
 })
 
@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={robotoMono.className}>
+    <html lang="en" className={robotoCondensed.className}>
       <body className="">
         <Navbar />
         <main>

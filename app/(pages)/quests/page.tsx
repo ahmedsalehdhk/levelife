@@ -61,7 +61,7 @@ const page = async () => {
         </button>
       </Form>
       <hr className="mb-3" />
-      <div className="quests flex flex-col space-y-4 p-2">
+      <div className="quests flex flex-wrap gap-5 p-5">
         {quests.map((quest) => (
           <QuestCard key={quest.id} id={quest.id} title={quest.title} category={quest.category} difficulty={quest.difficulty} repeat={quest.repeat} />
         ))}

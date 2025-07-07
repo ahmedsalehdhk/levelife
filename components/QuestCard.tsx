@@ -2,6 +2,9 @@
 
 import React, { useState } from "react";
 import { useTransition } from "react";
+import { Edit3 } from "@deemlol/next-icons";
+import Image from 'next/image';
+import img from '/public/assets/recognition.png'
 
 // actions
 import { deleteQuest } from "@/app/actions/deleteQuest";
@@ -35,16 +38,50 @@ const QuestCard = ({ id, title, category, difficulty, repeat }: QuestCardProps) 
     });
   };
 
+  let difficultyLevel: string = ''
+
+  switch (difficulty) {
+    case 'SIMPLE':
+      difficultyLevel = '⭐'
+      break;
+    case 'EASY':
+      difficultyLevel = '⭐⭐'
+      break;
+    case 'MODERATE':
+      difficultyLevel = '⭐⭐⭐'
+      break;
+    case 'HARD':
+      difficultyLevel = '⭐⭐⭐⭐'
+      break;
+    case 'INSANE':
+      difficultyLevel = '⭐⭐⭐⭐⭐'
+      break;
+  
+    default:
+      difficultyLevel = "N/A"
+      break;
+  }
+
   return (
-    <div className="border p-3">
-      <h1>{title}</h1>
-      <p>
-        Category: {category}, Difficulty: {difficulty}, Repeat: {repeat}
-      </p>
-      <button onClick={() => setEditing(true)} className="bg-yellow-500 text-white px-3 py-1 rounded-full">Edit</button>
-      <button onClick={handleDelete} disabled={isPending} className="bg-red-500 py-1 px-4 rounded-full cursor-pointer">
-        {isPending ? "Deleting..." : "Delete"}
-      </button>
+    <div className="quest-card flex flex-col justify-between px-5 py-8 w-64 min-h-96 rounded-xl bg-purple-200 border  border-neutral-200">
+      <div className="flex items-center justify-between mb-8">
+        <h1 className='logo font-black'>Levelife</h1>
+        <button onClick={() => setEditing(true)} className="border-2 border-transparent hover:border-black rounded-full p-1.5 transition-colors cursor-pointer"><Edit3 size={24} color="#000000" /></button>
+      </div>
+      <Image src={img} width={150} alt="shapes" className='mx-auto mb-10' />
+      <h1 className='text-2xl font-bold mb-3'>{title}</h1>
+      <hr className='border-neutral-600 mb-3' />
+      {/* <p className='text-sm font-medium mb-3'>{category} task, its {difficulty} and repeat {repeat}</p> */}
+      <div className="info mb-3">
+        <p className='text-sm font-medium'>{category} task</p>
+        <p className='text-sm font-medium'>Difficulty: {difficultyLevel}</p>
+        <p className='text-sm font-medium'>Repeat {repeat}</p>
+      </div>
+      <hr className='border-neutral-600 mb-3' />
+      <div className="action-buttons flex gap-1 font-black">
+        <button onClick={handleDelete} disabled={isPending} className="flex-1 border p-2 rounded-lg cursor-pointer hover:bg-black hover:text-white hover:border-black transition-colors">Abandon</button>
+        <button className='flex-1 border p-2 rounded-lg cursor-pointer hover:bg-black hover:text-white hover:border-black transition-colors'>Completed</button>
+      </div>
 
       {/* Edit Modal */}
       {editing && (
