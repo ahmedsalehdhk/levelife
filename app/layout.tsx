@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import { Roboto_Condensed } from 'next/font/google'
+import { Roboto_Condensed, VT323 } from 'next/font/google'
 
 
 export const metadata: Metadata = {
@@ -9,9 +9,8 @@ export const metadata: Metadata = {
   description: "Gamification of life",
 };
 
-const robotoCondensed = Roboto_Condensed({
-  subsets: ['latin'],
-})
+const robotoCondensed = Roboto_Condensed({ subsets: ['latin'], variable: '--font-robotoCondensed' });
+const vt323 = VT323({ subsets: ['latin'], weight: '400', variable: '--font-vt323' });
 
 export default function RootLayout({
   children,
@@ -19,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={robotoCondensed.className}>
+    <html lang="en" className={vt323.className}>
       <body className="">
         <Navbar />
         <main className=''>

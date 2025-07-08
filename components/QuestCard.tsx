@@ -3,8 +3,7 @@
 import React, { useState } from "react";
 import { useTransition } from "react";
 import { Edit3 } from "@deemlol/next-icons";
-import Image from 'next/image';
-import img from '/public/assets/recognition.png'
+import Image from "next/image";
 
 // actions
 import { deleteQuest } from "@/app/actions/deleteQuest";
@@ -25,7 +24,7 @@ const QuestCard = ({ id, title, category, difficulty, repeat }: QuestCardProps) 
   const [form, setForm] = useState({ title, category, difficulty, repeat });
 
   const handleDelete = () => {
-    if (confirm("Hilarious. Abandon quest for sure?")) {
+    if (confirm("Weak. Abandoning quest, are you sure?")) {
       startTransition(() => {
         deleteQuest(id);
       });
@@ -38,49 +37,68 @@ const QuestCard = ({ id, title, category, difficulty, repeat }: QuestCardProps) 
     });
   };
 
-  let difficultyLevel: string = ''
+  let difficultyLevel: string = "";
 
   switch (difficulty) {
-    case 'SIMPLE':
-      difficultyLevel = '★'
+    case "SIMPLE":
+      difficultyLevel = "★";
       break;
-    case 'EASY':
-      difficultyLevel = '★★'
+    case "EASY":
+      difficultyLevel = "★★";
       break;
-    case 'MODERATE':
-      difficultyLevel = '★★★'
+    case "MODERATE":
+      difficultyLevel = "★★★";
       break;
-    case 'HARD':
-      difficultyLevel = '★★★★'
+    case "HARD":
+      difficultyLevel = "★★★★";
       break;
-    case 'INSANE':
-      difficultyLevel = '★★★★★'
+    case "INSANE":
+      difficultyLevel = "★★★★★";
       break;
-  
+
     default:
-      difficultyLevel = "N/A"
+      difficultyLevel = "N/A";
       break;
   }
 
+  const categoryImages: Record<string, string> = {
+    LEARNING: "/assets/learning.png",
+    FITNESS: "/assets/fitness.png",
+    SELFCARE: "/assets/selfcare.png",
+    SOCIAL: "/assets/social.png",
+    FINANCE: "/assets/finance.png",
+    CAREER: "/assets/career.png",
+    CREATIVITY: "/assets/creativity.png",
+    PRODUCTIVITY: "/assets/productivity.png",
+    MISCELLANEOUS: "/assets/miscellaneous.png",
+  };
+
+  const imageSrc = categoryImages[category] ?? "/assets/career.png";
+
   return (
-    <div className="quest-card flex flex-col justify-between px-5 py-8 w-64 min-h-96 rounded-xl bg-purple-200 border  border-neutral-200">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className='logo font-black'>Levelife</h1>
-        <button onClick={() => setEditing(true)} className="border-2 border-transparent hover:border-black rounded-full p-1.5 transition-colors cursor-pointer"><Edit3 size={24} color="#000000" /></button>
-      </div>
-      <Image src={img} width={150} alt="shapes" className='mx-auto mb-10' />
-      <h1 className='text-2xl font-bold mb-3'>{title}</h1>
-      <hr className='border-neutral-600 mb-3' />
-      {/* <p className='text-sm font-medium mb-3'>{category} task, its {difficulty} and repeat {repeat}</p> */}
-      <div className="info mb-3">
-        <p className='text-sm font-medium'>{category} task</p>
-        <p className='text-sm font-medium'>Difficulty: {difficultyLevel}</p>
-        <p className='text-sm font-medium'>Repeat {repeat}</p>
-      </div>
-      <hr className='border-neutral-600 mb-3' />
-      <div className="action-buttons flex gap-1 font-black">
-        <button onClick={handleDelete} disabled={isPending} className="flex-1 border p-2 rounded-lg cursor-pointer hover:bg-red-500 hover:text-white hover:border-black transition-colors">Abandon</button>
-        <button className='flex-1 border p-2 rounded-lg cursor-pointer hover:bg-black hover:text-white hover:border-black transition-colors'>Completed</button>
+    <div className="">
+      <div className="quest-card flex flex-col justify-between px-5 py-8 w-64 min-h-96 rounded-xl bg-green-200 border-5 border-black hover:-translate-y-2 transition-all">
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="logo font-black">QUEST</h1>
+          <button onClick={() => setEditing(true)} className="border-2 border-transparent hover:border-black rounded-full p-1.5 transition-colors cursor-pointer">
+            <Edit3 size={24} color="#000000" />
+          </button>
+        </div>
+        <Image src={imageSrc} width={100} height={100} alt="shapes" className="mx-auto h-auto w-max mb-10" />
+        <h1 className="text-2xl font-bold mb-1 uppercase">{title}</h1>
+        <hr className="border-neutral-600 mb-3" />
+        <div className="info mb-3">
+          <p className="text-xl font-medium">{category} task</p>
+          <p className="text-xl font-medium">Difficulty: {difficultyLevel}</p>
+          <p className="text-xl font-medium">Repeat {repeat}</p>
+        </div>
+        <hr className="border-neutral-600 mb-3" />
+        <div className="action-buttons flex gap-1 font-black">
+          <button onClick={handleDelete} disabled={isPending} className="flex-1 border-2 py-2 rounded-lg text-xl cursor-pointer hover:bg-red-500 hover:text-white hover:border-black transition-colors">
+            Abandon
+          </button>
+          <button className="flex-1 border-2 py-2 rounded-lg text-xl cursor-pointer hover:bg-black hover:text-white hover:border-black transition-colors">Completed</button>
+        </div>
       </div>
 
       {/* Edit Modal */}
